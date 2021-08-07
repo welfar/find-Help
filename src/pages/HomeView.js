@@ -1,12 +1,12 @@
-import HeaderNav from "../components/HeaderNav";
+
 import "../styles/HomeView.css";
 
 function HomeView() {
-	return (
-		<div>
-			<HeaderNav />
-		</div>
-	);
+  return (
+    <div>
+    </div>
+    
+  )
 }
 
 export default HomeView;
