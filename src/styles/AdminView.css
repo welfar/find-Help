@@ -1,0 +1,15 @@
+.navigation {
+  margin: 110px 15% 1%;
+  position: unset;
+}
+
+.navigation-card.navigation-card {
+  text-align: center;
+  position: unset;
+}
+
+.newManBtnGp {
+  margin-right: 15px;
+  display: flex;
+  justify-content: center;
+}
