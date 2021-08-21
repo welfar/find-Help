@@ -5,18 +5,20 @@ import { accessAdmin } from "../store/selectAdminReducer";
 
 function AccessModal() {
 	const dispatch = useDispatch();
-  const history = useHistory();
+	const history = useHistory();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 
-	const handleSignIn = (e) => {
-    e.preventDefault();
+	const handleSignIn = () => {
 		dispatch(accessAdmin(email, password, history));
-	};
+	};    
 
 	return (
 		<form
-			onSubmit={handleSignIn}
+			onSubmit={(e) => {
+				e.preventDefault();
+				handleSignIn();
+			}}
 		>
 			<div
 				className="modal fade"
@@ -30,10 +32,7 @@ function AccessModal() {
 				<div className="modal-dialog">
 					<div className="modal-content">
 						<div className="modal-header">
-							<h5
-								className="modal-title"
-								id="staticBackdropLabel"
-							>
+							<h5 className="modal-title" id="staticBackdropLabel">
 								Ingreso Administrativo
 							</h5>
 							<button
@@ -70,13 +69,16 @@ function AccessModal() {
 									disabled={email === ""}
 									className="form-control"
 									name="password"
-                  onChange={(e) => setPassword(e.target.value)}
+									onChange={(e) => setPassword(e.target.value)}
 									value={password}
 								/>
 							</div>
 						</div>
 						<div className="modal-footer">
-							<button type="submit" className="btn btn-primary">
+							<button
+								type="submit"
+								className="custom-close btn btn-primary"
+							>
 								Ingresar
 							</button>
 						</div>

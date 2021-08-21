@@ -2,8 +2,6 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClinicMedical, faTasks, faUserCog } from "@fortawesome/free-solid-svg-icons";
 import logo from "../assets/images/logo.png";
-import RegistrationModal from "./RegistrationModal";
-import SignInForm from "./SignInForm";
 
 function HeaderNav() {
 	return (
@@ -50,7 +48,7 @@ function HeaderNav() {
 									</div>
 									Admin
 								</button>
-							</div>
+              </div>
 						</nav>
 					</div>
 				</div>

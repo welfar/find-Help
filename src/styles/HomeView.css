@@ -2,22 +2,10 @@ html {
   height: 100%;
 }
 
-body {
-  background: linear-gradient(
-			rgba(250, 250, 250, 0.1),
-			rgba(250, 250, 250, 0.1)
-		),
-		url("../assets/images/animal-care.jpg") no-repeat center top;
-	background-attachment: fixed;
-	background-size: contain;
-  height: 100%;
-}
-
 header {
 	background-color: rgba(93, 173, 226, 0.9);
 	width: 100%;
 	overflow: hidden;
-  position: fixed;
   top: 0;
 }
 
@@ -27,7 +15,6 @@ footer {
   width: 100%;
   padding: 1%;
   bottom: 0;
-  position: fixed;
 }
 
 .headerNavBar {
@@ -54,6 +41,29 @@ footer {
 	border-radius: 90%;
 }
 
+.imgButt {
+  flex-direction: column;
+  justify-content: center;
+}
+
+.portrait {
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+  border-radius: 100%;
+}
+
+.imageProfile {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imgContainer img {
+  width: 100%;
+  height: auto;
+}
+
 .item-content {
 	display: inline-block;
   text-align: center;
@@ -72,14 +82,11 @@ footer {
 }
 
 .news-container {
-	margin-top: 110px;
 	padding: 20px;
-	/* max-width: 750px; */
-	background: blueviolet;
 }
 
 .img {
-	height: 550px;
+	height: 400px;
 	object-fit: contain;
 }
 

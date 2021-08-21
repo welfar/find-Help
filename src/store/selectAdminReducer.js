@@ -1,5 +1,10 @@
 import Swal from "sweetalert2";
-import { adminSignIn, registrateNews, getNewsList, destroyNews } from "./admin/services";
+import {
+	adminSignIn,
+	registrateNews,
+	getNewsList,
+	destroyNews,
+} from "./admin/services";
 
 export const ADMIN_SIGN_IN = "ADMIN_SIGN_IN";
 export const CREATE_NEW = "CREATE_NEW";
@@ -7,23 +12,22 @@ export const GET_NEWS_LIST = "GET_NEWS_LIST";
 export const ASSIGN_NEW_TO_DELETE = "ASSIGN_NEW_TO_DELETE";
 export const REMOVE_NEW_DELETED = "REMOVE_NEW_DELETED";
 
-
 export function accessAdmin(email, password, history) {
-  return async function (dispatch) {
-    try {
-      const { data } = await adminSignIn(email, password);
-      if (data.token) {
-        localStorage.setItem("token", data.token);
-        history.push("/AdminView");
-      }
-      dispatch({
-        type: ADMIN_SIGN_IN,
-        payload: data.admin,
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
+	return async function (dispatch) {
+		try {
+			const { data } = await adminSignIn(email, password);
+			if (data.token) {
+				localStorage.setItem("token", data.token);
+				history.push("/AdminView");
+			}
+			dispatch({
+				type: ADMIN_SIGN_IN,
+				payload: data.admin,
+			});
+		} catch (error) {
+			console.log(error.message);
+		}
+	};
 }
 
 export function uploadNews(file) {
@@ -106,19 +110,19 @@ export function deleteNews(newsToDelete) {
 }
 
 const initialState = {
-  admin: {},
+	admin: {},
 	newsList: {},
 	newsToDelete: "",
 };
 
 function reducer(state = initialState, action) {
 	switch (action.type) {
-    case ADMIN_SIGN_IN: {
-      return {
-        ...state,
-        admin: action.payload,
-      };
-    }
+		case ADMIN_SIGN_IN: {
+			return {
+				...state,
+				admin: action.payload,
+			};
+		}
 		case CREATE_NEW: {
 			return {
 				...state,
@@ -152,4 +156,3 @@ function reducer(state = initialState, action) {
 }
 
 export default reducer;
-

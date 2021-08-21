@@ -28,7 +28,9 @@ function NewsList() {
       newsList.length > 0 &&
       newsList.map((news) => {
         return (
-          <tr>
+            <div className="radioCont">
+          <tr Style="display: flex;align-items: center;">
+            
             <th>
               <div className="form-check">
               <input
@@ -39,7 +41,7 @@ function NewsList() {
                 value={news._id}
                 onChange={(e) => handleDelete(e.target.value)}
                 checked
-              />
+                />
               </div>
             </th>
             <td>
@@ -48,6 +50,7 @@ function NewsList() {
               </label>
             </td>
           </tr>
+      </div>
         );
       })
     );
@@ -55,12 +58,12 @@ function NewsList() {
 
   return (
     <table className="table table-hover">
-      <thead>
+      {/* <thead>
         <tr>
           <th>Selecciona</th>
           <th>Imagen</th>
         </tr>
-      </thead>
+      </thead> */}
       <tbody>{renderTableNews()}</tbody>
     </table>
   );

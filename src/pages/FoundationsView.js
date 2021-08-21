@@ -1,8 +1,11 @@
-
+import ViewFoundations from "../components/ViewFoundations";
+import "../styles/FoundationsView.css";
 
 function FoundationsView() {
   return(
-<div></div>
+<div className="listFoundations">
+  <ViewFoundations />
+</div>
   )
 
 }

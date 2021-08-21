@@ -19,7 +19,21 @@ export async function foundationRegister(
   });
 }
 
+export async function updateFoundationProfilePic (token, data) {
+  return await axios({
+    method: "PUT",
+    baseURL: process.env.REACT_APP_SERVER_URL,
+    url: "/Foundations/foundationsProfilePic",
+    data,
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "multipart/form-data",
+    },
+  });
+}
+
 export async function foundationUpdate(
+  token,
   name,
   email,
   address,
@@ -34,6 +48,9 @@ export async function foundationUpdate(
       email,
       address,
       phone
+    },
+    headers: {
+      Authorization: `Bearer ${token}`,
     },
   });
 }

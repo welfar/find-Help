@@ -1,5 +1,5 @@
 .navigation {
-  margin: 110px 15% 1%;
+  margin: 1% 15% 1%;
   position: unset;
 }
 
@@ -12,4 +12,18 @@
   margin-right: 15px;
   display: flex;
   justify-content: center;
+}
+
+.radioCont {
+  display: flex;
+  justify-content: center;
+}
+
+.dualButton {
+  display: flex;
+  justify-content: center; 
+}
+
+.buttonManager {
+  margin: 1%;
 }

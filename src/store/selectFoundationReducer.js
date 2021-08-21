@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import {
 	foundationRegister,
+	updateFoundationProfilePic,
 	foundationUpdate,
 	getFoundationInfo,
 	getFoundationList,
@@ -8,16 +9,20 @@ import {
 } from "./Foundation/Services";
 
 export const CREATE_NEW_FOUNDATION = "CREATE_NEW_FOUNDATION";
+export const SAVE_FOUNDATION_PROFILE_PIC = "SAVE_FOUNDATION_PROFILE_PIC";
 export const UPDATE_FOUNDATION_PROFILE_INFO = "UPDATE_FOUNDATION_PROFILE_INFO";
 export const GET_FOUNDATION_LIST = "GET_FOUNDATION_LIST";
 export const GET_FOUNDATION = "GET_FOUNDATION";
 export const REMOVE_FOUNDATION_DELETED = "REMOVE_FOUNDATION_DELETED";
 export const ASSIGN_FOUNDATION_TO_DELETE = "ASSIGN_FOUNDATION_TO_DELETE";
 
-export function createNewFoundation(name, email, address, phone) {
+export function createNewFoundation(name, email, phone, address, history) {
 	return async function (dispatch) {
 		try {
-			const { data } = await foundationRegister(name, email, address, phone);
+			const { data } = await foundationRegister(name, email, phone, address);
+			if (data) {
+				history.push("/FoundationsView");
+			}
 			dispatch({
 				type: CREATE_NEW_FOUNDATION,
 				payload: data,
@@ -36,6 +41,40 @@ export function createNewFoundation(name, email, address, phone) {
 				button: "OK",
 			});
 			console.log(error.message);
+		}
+	};
+}
+
+export function updateImage(file) {
+	return async function (dispatch) {
+		try {
+			const form_data = new FormData();
+			if (file) {
+				form_data.append("profilePicture", file, file.name);
+			}
+			let authorizationToken = localStorage.getItem("token");
+			const { data } = await updateFoundationProfilePic(
+				authorizationToken,
+				form_data
+			);
+			dispatch({
+				type: SAVE_FOUNDATION_PROFILE_PIC,
+				payload: data,
+			});
+			Swal.fire({
+				title: "Confirmation",
+				icon: "success",
+				text: `Tu Logo ha sido cargado satisfactoriamente!`,
+				button: "OK",
+			});
+		} catch (error) {
+			console.log(error.message);
+			Swal.fire({
+				title: "Alert",
+				icon: "error",
+				text: `Algo salió mal!`,
+				button: "OK",
+			});
 		}
 	};
 }
@@ -141,6 +180,18 @@ function reducer(state = initialState, action) {
 			return {
 				...state,
 				foundationList: state.foundationList.concat(action.payload),
+			};
+		}
+		case SAVE_FOUNDATION_PROFILE_PIC: {
+			return {
+				...state,
+				foundation: action.payload,
+			};
+		}
+		case UPDATE_FOUNDATION_PROFILE_INFO: {
+			return {
+				...state,
+				foundation: action.payload,
 			};
 		}
 		case GET_FOUNDATION_LIST: {

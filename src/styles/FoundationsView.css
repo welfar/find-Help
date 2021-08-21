@@ -1,0 +1,15 @@
+.listFoundations {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1%;
+}
+
+.fundationCards {
+  width: 640px;
+}
+
+.card-body {
+  background: rgba(133, 193, 233, 0.6);
+}

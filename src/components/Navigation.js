@@ -1,5 +1,7 @@
 import NewsManager from "./NewsManager";
 import NewsList from "./NewsList";
+import UpdateInfoFoundations from "./UpdateInfoFundations";
+import ManagerInfoFoundations from "./ManagerInfoFundations";
 
 function Navigation() {
 	return (
@@ -46,7 +48,7 @@ function Navigation() {
 							<NewsManager />
 							<br />
 							<h2>Noticias</h2>
-              <br />
+							<br />
 							<NewsList />
 						</div>
 					</div>
@@ -56,7 +58,8 @@ function Navigation() {
 						role="tabpanel"
 						aria-labelledby="nav-update-tab"
 					>
-						...
+						<UpdateInfoFoundations />
+						<ManagerInfoFoundations />
 					</div>
 				</div>
 			</div>

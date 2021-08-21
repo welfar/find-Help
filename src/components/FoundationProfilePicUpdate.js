@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { uploadNews } from "../store/selectAdminReducer";
+import { updateImage } from "../store/selectFoundationReducer";
 
-function UploadNews() {
+function UpdateFoundationProfilePic() {
 	const dispatch = useDispatch();
 	const [file, setFile] = useState(null);
 	const [image, setImage] = useState(null);
@@ -19,7 +19,7 @@ function UploadNews() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		dispatch(uploadNews(file));
+		dispatch(updateImage(file));
 	};
 
 	return (
@@ -27,9 +27,10 @@ function UploadNews() {
 			<form onSubmit={handleSubmit}>
 				<div
 					className="modal fade"
-					id="UploadNews"
+					role="dialog"
+					Style="z-index: 1600"
+					id="FoundationProfilePicUpdate"
 					data-bs-backdrop="static"
-					data-bs-keyboard="false"
 					tabIndex="-1"
 					aria-labelledby="staticBackdropLabel"
 					aria-hidden="true"
@@ -38,7 +39,7 @@ function UploadNews() {
 						<div className="modal-content">
 							<div className="modal-header">
 								<h5 className="modal-title" id="staticBackdropLabel">
-									Subir noticias
+									Carga el logo de la fundación
 								</h5>
 								<button
 									type="button"
@@ -54,11 +55,10 @@ function UploadNews() {
 									id="file"
 									onChange={selectImage}
 									accept="image/*"
-									style={{ color: "black" }}
 								/>
-                <div className="imgContainer">
-								{image && <img src={image} alt="preview" />}
-                </div>
+								<div className="imgContainer">
+									{image && <img src={image} alt="preview" />}
+								</div>
 							</div>
 							<div className="modal-footer">
 								<button
@@ -71,6 +71,9 @@ function UploadNews() {
 								<button
 									className="btn btn-primary btn-sm"
 									img
+									data-bs-target="#foundationRegistration"
+									data-bs-toggle="modal"
+									data-bs-dismiss="modal"
 									onClick={(e) => setImage(null)}
 								>
 									Cargar
@@ -84,4 +87,4 @@ function UploadNews() {
 	);
 }
 
-export default UploadNews;
+export default UpdateFoundationProfilePic;
