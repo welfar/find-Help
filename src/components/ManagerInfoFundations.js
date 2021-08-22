@@ -1,18 +1,12 @@
-import { useSelector, useDispatch } from "react-redux";
-import Upgrade from "./Upgrade";
+import { useDispatch } from "react-redux";
 import { deleteFoundation } from "../store/selectFoundationReducer";
+import Upgrade from "./Upgrade";
 
-function ManagerInfoFoundations() {
+function ManagerInfoFoundations({foundation}) {
 	const dispatch = useDispatch();
 
-	const { foundationToDelete } = useSelector((state) => {
-		return {
-			foundationToDelete: state.selectFoundationReducer.foundationToDelete,
-		};
-	});
-
 	const handleDelete = () => {
-		dispatch(deleteFoundation(foundationToDelete));
+		dispatch(deleteFoundation(foundation._id));
 	};
 
 	return (
@@ -38,7 +32,7 @@ function ManagerInfoFoundations() {
 					</button>
 				</div>
 			</div>
-			<Upgrade />
+			<Upgrade foundation={foundation}/>
 		</div>
 	);
 }

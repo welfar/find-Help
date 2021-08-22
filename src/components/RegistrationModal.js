@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { createNewFoundation } from "../store/selectFoundationReducer";
 import FoundationProfilePicUpdate from "./FoundationProfilePicUpdate";
@@ -12,14 +12,14 @@ function RegistrationModal() {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-	// const { foundation } = useSelector((state) => {
-	// 	return {
-	// 		foundation: state.selectFoundationReducer.foundation,
-	// 	};
-	// });
-
 	const handleRegister = () => {
 		dispatch(createNewFoundation(Name, Email, Phone, Address, history));
+	};
+
+  const onSave = () => {
+		const modalEl = document.getElementById("foundationRegistration");
+		const modal = window.bootstrap.Modal.getInstance(modalEl);
+		modal.hide();
 	};
 
 	return (
@@ -134,6 +134,7 @@ function RegistrationModal() {
 								type="submit"
 								disabled={Email === ""}
 								className="btn btn-primary btn-sm"
+                onClick={onSave}
 							>
 								Registrar
 							</button>

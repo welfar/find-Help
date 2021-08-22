@@ -3,8 +3,8 @@ import axios from "axios";
 export async function foundationRegister(
   name,
   email,
-  address,
-  phone
+  phone,
+  address
 ) {
   return await axios({
     method: "POST",
@@ -13,8 +13,8 @@ export async function foundationRegister(
     data: {
       name,
       email,
-      address,
-      phone
+      phone,
+      address
     },
   });
 }
@@ -33,24 +33,21 @@ export async function updateFoundationProfilePic (token, data) {
 }
 
 export async function foundationUpdate(
-  token,
+  foundationId,
   name,
-  email,
-  address,
-  phone
+  phone,
+  address
 ) {
+  console.log("services")
   return await axios({
     method: "PUT",
     baseURL: process.env.REACT_APP_SERVER_URL,
     url: "/Foundations/foundationUpdate",
     data: {
+      foundationId,
       name,
-      email,
-      address,
-      phone
-    },
-    headers: {
-      Authorization: `Bearer ${token}`,
+      phone,
+      address
     },
   });
 }
@@ -72,6 +69,7 @@ export async function getFoundationInfo() {
 }
 
 export async function destroyFoundation(foundationId) {
+  console.log(foundationId, "services")
   return await axios({
     method: "DELETE",
     baseURL: process.env.REACT_APP_SERVER_URL,

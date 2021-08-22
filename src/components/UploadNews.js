@@ -22,6 +22,12 @@ function UploadNews() {
 		dispatch(uploadNews(file));
 	};
 
+  const onSave = () => {
+    const modalEl = document.getElementById("UploadNews");
+    const modal = window.bootstrap.Modal.getInstance(modalEl);
+    modal.hide();
+  }
+
 	return (
 		<div>
 			<form onSubmit={handleSubmit}>
@@ -71,7 +77,10 @@ function UploadNews() {
 								<button
 									className="btn btn-primary btn-sm"
 									img
-									onClick={(e) => setImage(null)}
+									onClick={(e) => {
+                    setImage(null)
+                    {onSave()}
+                  }}
 								>
 									Cargar
 								</button>

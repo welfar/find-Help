@@ -11,7 +11,13 @@ function AccessModal() {
 
 	const handleSignIn = () => {
 		dispatch(accessAdmin(email, password, history));
-	};    
+	}; 
+  
+  const onSave = () => {
+		const modalEl = document.getElementById("accessAdmin");
+		const modal = window.bootstrap.Modal.getInstance(modalEl);
+		modal.hide();
+	};
 
 	return (
 		<form
@@ -78,6 +84,7 @@ function AccessModal() {
 							<button
 								type="submit"
 								className="custom-close btn btn-primary"
+                onClick={onSave}
 							>
 								Ingresar
 							</button>

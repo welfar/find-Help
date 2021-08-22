@@ -36,11 +36,11 @@ function NewsList() {
               <input
                 className="form-check-input"
                 type="radio"
-                id={news._id}
+                // id={news._id}
                 name="newsToDelete"
                 value={news._id}
                 onChange={(e) => handleDelete(e.target.value)}
-                checked
+                // checked
                 />
               </div>
             </th>

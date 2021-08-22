@@ -11,5 +11,29 @@
 }
 
 .card-body {
-  background: rgba(133, 193, 233, 0.6);
+  background: rgba(133, 193, 233, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center ;
+}
+
+.card-text {
+  display: flex;
+  align-items: center;
+}
+ 
+.giveButt {
+  display: flex;
+  flex: auto;
+  justify-content: flex-end;
+  margin-right: 15%;
+}
+
+.donaButt.donaButt {
+  display: flex;
+  justify-content: space-around;
+}
+
+.icon {
+  padding-right: 7%;
 }

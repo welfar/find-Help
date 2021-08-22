@@ -14,6 +14,7 @@ export const UPDATE_FOUNDATION_PROFILE_INFO = "UPDATE_FOUNDATION_PROFILE_INFO";
 export const GET_FOUNDATION_LIST = "GET_FOUNDATION_LIST";
 export const GET_FOUNDATION = "GET_FOUNDATION";
 export const REMOVE_FOUNDATION_DELETED = "REMOVE_FOUNDATION_DELETED";
+export const ASSIGN_FOUNDATION_TO_UPDATE = "ASSIGN_FOUNDATION_TO_UPDATE";
 export const ASSIGN_FOUNDATION_TO_DELETE = "ASSIGN_FOUNDATION_TO_DELETE";
 
 export function createNewFoundation(name, email, phone, address, history) {
@@ -79,10 +80,10 @@ export function updateImage(file) {
 	};
 }
 
-export function updateFoundationProfileInfo(name, email, address, phone) {
+export function updateFoundationProfileInfo(foundation, name, address, phone) {
 	return async function (dispatch) {
 		try {
-			const { data } = await foundationUpdate(name, email, address, phone);
+			const { data } = await foundationUpdate(foundation, name, address, phone);
 			dispatch({
 				type: UPDATE_FOUNDATION_PROFILE_INFO,
 				payload: data,
@@ -159,6 +160,15 @@ export function deleteFoundation(foundationToDelete) {
 	};
 }
 
+export function assignFoundationToUpdate(id) {
+  return async function (dispatch) {
+    dispatch({
+      type: ASSIGN_FOUNDATION_TO_UPDATE,
+      payload: id,
+    })
+  }
+}
+
 export function assignFoundationToDelete(id) {
 	return async function (dispatch) {
 		dispatch({
@@ -171,6 +181,7 @@ export function assignFoundationToDelete(id) {
 const initialState = {
 	foundation: {},
 	foundationList: {},
+  foundationToUpdate: "",
 	foundationToDelete: "",
 };
 
@@ -192,6 +203,9 @@ function reducer(state = initialState, action) {
 			return {
 				...state,
 				foundation: action.payload,
+        foundationList: state.foundationList.map(
+          (foundation) => foundation._id === action.payload._id ? action.payload : foundation
+        )
 			};
 		}
 		case GET_FOUNDATION_LIST: {
@@ -209,11 +223,17 @@ function reducer(state = initialState, action) {
 		case REMOVE_FOUNDATION_DELETED: {
 			return {
 				...state,
-				foundataionList: state.foundationList.filter(
+				foundationList: state.foundationList.filter(
 					(foundation) => foundation._id !== action.payload._id
 				),
 			};
 		}
+    case ASSIGN_FOUNDATION_TO_UPDATE:{
+      return {
+        ...state,
+        foundationToUpdate: action.payload,
+      };
+    }
 		case ASSIGN_FOUNDATION_TO_DELETE: {
 			return {
 				...state,

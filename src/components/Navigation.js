@@ -1,9 +1,17 @@
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import NewsManager from "./NewsManager";
 import NewsList from "./NewsList";
-import UpdateInfoFoundations from "./UpdateInfoFundations";
-import ManagerInfoFoundations from "./ManagerInfoFundations";
+import ListFoundations from "./ListFundations";
+import { getAllFoundation } from "../store/selectFoundationReducer";
 
 function Navigation() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllFoundation());
+  }, []);
+
 	return (
 		<div className="navigation-card card">
 			<div className="card-header">
@@ -58,8 +66,8 @@ function Navigation() {
 						role="tabpanel"
 						aria-labelledby="nav-update-tab"
 					>
-						<UpdateInfoFoundations />
-						<ManagerInfoFoundations />
+						<ListFoundations />
+						
 					</div>
 				</div>
 			</div>
