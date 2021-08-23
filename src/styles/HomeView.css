@@ -83,6 +83,10 @@ footer {
 
 .news-container {
 	padding: 20px;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+		url("../assets/images/Quindio.jpg") no-repeat center top;
+  background-attachment: fixed;
+	background-size: cover;
 }
 
 .img {
@@ -108,11 +112,40 @@ footer {
 	color: #21618c;
 }
 
-.slogan {
+.contain {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.fandh {
+  background: #ABEBC6;
 	font-size: 30px;
-	color: #1a5276;
-	margin: 20px;
+	color: #21618c;
+	margin-top: 20px;
 	text-align: center;
+}
+
+.mivi {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  color: #21618c;
+}
+
+h2 {
+  font-weight: bolder !important;
+  color: #21618c;
+}
+
+.mision {
+  margin: 2%;
+  width: 50%;
+}
+
+.vision {
+  margin: 2%;
+  width: 50%;
 }
 
 .container {
@@ -145,6 +178,8 @@ footer {
 
 p {
   margin: 0 0 10px;
+  color: #21618c;
+  font-size: 16px;
 }
 
 .section {

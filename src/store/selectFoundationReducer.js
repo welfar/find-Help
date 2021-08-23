@@ -194,7 +194,8 @@ const initialState = {
 	foundationList: {},
   foundationToUpdate: "",
 	foundationToDelete: "",
-  foundationToAssign: ""
+  foundationToAssign: "",
+  donation: "",
 };
 
 function reducer(state = initialState, action) {
@@ -261,9 +262,9 @@ function reducer(state = initialState, action) {
 				foundationToDelete: action.payload,
 			};
 		}
-		default: {
-			return state;
-		}
+    default: {
+      return state;
+    }
 	}
 }
 

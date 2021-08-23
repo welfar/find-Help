@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { createNewFoundation, getFoundation } from "../store/selectFoundationReducer";
-// import FoundationProfilePicUpdate from "./FoundationProfilePicUpdate";
+import { createNewFoundation } from "../store/selectFoundationReducer";
 
 function RegistrationModal() {
 	const [Name, setName] = useState("");
@@ -11,16 +10,6 @@ function RegistrationModal() {
 	const [Address, setAddress] = useState("");
 	const dispatch = useDispatch();
 	const history = useHistory();
-
-  useEffect(() => {
-    dispatch(getFoundation())
-  }, [])
-
-  const { foundation } = useSelector((state) => {
-    return {
-      foundation: state.selectFoundationReducer.foundation,
-    };
-  });
 
 	const handleRegister = () => {
 		dispatch(createNewFoundation(Name, Email, Phone, Address, history));
@@ -59,25 +48,6 @@ function RegistrationModal() {
 							></button>
 						</div>
 						<div className="modal-body">
-							{/* <div className="imgButt d-flex flex-colmun align-items-center">
-								<div className="portrait">
-									<img
-										src={foundation.logo}
-										alt="fundationPicture"
-										className="imageProfile rounded-circle"
-										width="150"
-									/>
-								</div> */}
-								{/* <button
-									type="button"
-									data-bs-toggle="modal"
-									data-bs-target="#FoundationProfilePicUpdate"
-									className="btn btn-primary btn-sm"
-									data-bs-dismiss="modal"
-								>
-									Agregar Logo
-								</button> */}
-							{/* </div> */}
 							<div>
 								<label htmlFor="Name">
 									<strong> *Nombre: </strong>
@@ -152,7 +122,6 @@ function RegistrationModal() {
 					</div>
 				</div>
 			</div>
-			{/* <FoundationProfilePicUpdate /> */}
 		</form>
 	);
 }

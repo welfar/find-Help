@@ -72,6 +72,8 @@ function ViewFoundations() {
 										<button
 											type="button"
 											className="donaButt btn btn-success"
+                      data-bs-toggle="modal" 
+                      data-bs-target="#staticBackdrop"
 											onClick={handlePayment}
 										>
 											<div className="icon">
