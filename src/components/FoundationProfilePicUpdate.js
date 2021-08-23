@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateImage } from "../store/selectFoundationReducer";
 
 function UpdateFoundationProfilePic() {
@@ -17,20 +17,32 @@ function UpdateFoundationProfilePic() {
 		setImage(result);
 	};
 
+  const { foundationToAssign } = useSelector((state) => {
+    return {
+      foundationToAssign: state.selectFoundationReducer.foundationToAssign,
+    }
+  })
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		dispatch(updateImage(file));
+		dispatch(updateImage(foundationToAssign, file));
 	};
+  
+
+  const onSave = () => {
+    const modalEl = document.getElementById("FoundationProfilePicUpdate");
+    const modal = window.bootstrap.Modal.getInstance(modalEl);
+    modal.hide();
+  }
 
 	return (
 		<div>
 			<form onSubmit={handleSubmit}>
 				<div
 					className="modal fade"
-					role="dialog"
-					Style="z-index: 1600"
 					id="FoundationProfilePicUpdate"
 					data-bs-backdrop="static"
+          data-bs-keyboard="false"
 					tabIndex="-1"
 					aria-labelledby="staticBackdropLabel"
 					aria-hidden="true"
@@ -70,11 +82,10 @@ function UpdateFoundationProfilePic() {
 								</button>
 								<button
 									className="btn btn-primary btn-sm"
-									img
-									data-bs-target="#foundationRegistration"
-									data-bs-toggle="modal"
-									data-bs-dismiss="modal"
-									onClick={(e) => setImage(null)}
+									onClick={(e) => {
+                    setImage(null)
+                    {onSave()}
+                  }}
 								>
 									Cargar
 								</button>

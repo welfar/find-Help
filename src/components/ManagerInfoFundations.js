@@ -1,8 +1,9 @@
 import { useDispatch } from "react-redux";
 import { deleteFoundation } from "../store/selectFoundationReducer";
 import Upgrade from "./Upgrade";
+import FoundationProfilePicUpdate from "./FoundationProfilePicUpdate";
 
-function ManagerInfoFoundations({foundation}) {
+function ManagerInfoFoundations({ foundation }) {
 	const dispatch = useDispatch();
 
 	const handleDelete = () => {
@@ -25,6 +26,16 @@ function ManagerInfoFoundations({foundation}) {
 				<div className="buttonManager">
 					<button
 						type="button"
+						data-bs-toggle="modal"
+						data-bs-target="#FoundationProfilePicUpdate"
+						className="btn btn-primary btn-sm"
+					>
+						Cambiar Logo
+					</button>
+				</div>
+				<div className="buttonManager">
+					<button
+						type="button"
 						className="btn btn-primary btn-sm"
 						onClick={handleDelete}
 					>
@@ -32,7 +43,8 @@ function ManagerInfoFoundations({foundation}) {
 					</button>
 				</div>
 			</div>
-			<Upgrade foundation={foundation}/>
+			<Upgrade foundation={foundation} />
+      <FoundationProfilePicUpdate />
 		</div>
 	);
 }

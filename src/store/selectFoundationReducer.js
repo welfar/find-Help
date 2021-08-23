@@ -9,6 +9,7 @@ import {
 } from "./Foundation/Services";
 
 export const CREATE_NEW_FOUNDATION = "CREATE_NEW_FOUNDATION";
+export const ASSIGN_TO_UPDATE_FOUNDATION_PROFILE_PIC = "ASSIGN_TO_UPDATE_FOUNDATION_PROFILE_PIC";
 export const SAVE_FOUNDATION_PROFILE_PIC = "SAVE_FOUNDATION_PROFILE_PIC";
 export const UPDATE_FOUNDATION_PROFILE_INFO = "UPDATE_FOUNDATION_PROFILE_INFO";
 export const GET_FOUNDATION_LIST = "GET_FOUNDATION_LIST";
@@ -46,16 +47,26 @@ export function createNewFoundation(name, email, phone, address, history) {
 	};
 }
 
-export function updateImage(file) {
+export function assignToUpdateFoundationProfilePic(id) {
+  return async function (dispatch) {
+    dispatch({
+      type: ASSIGN_TO_UPDATE_FOUNDATION_PROFILE_PIC,
+      payload: id,
+    });
+  };
+}
+
+export function updateImage(foundationToAssign, file) {
 	return async function (dispatch) {
 		try {
 			const form_data = new FormData();
 			if (file) {
-				form_data.append("profilePicture", file, file.name);
+				form_data.append("logo", file, file.name);
 			}
-			let authorizationToken = localStorage.getItem("token");
+      if (foundationToAssign) {
+				form_data.append("foundationToAssign", foundationToAssign);
+			}
 			const { data } = await updateFoundationProfilePic(
-				authorizationToken,
 				form_data
 			);
 			dispatch({
@@ -183,6 +194,7 @@ const initialState = {
 	foundationList: {},
   foundationToUpdate: "",
 	foundationToDelete: "",
+  foundationToAssign: ""
 };
 
 function reducer(state = initialState, action) {
@@ -193,10 +205,19 @@ function reducer(state = initialState, action) {
 				foundationList: state.foundationList.concat(action.payload),
 			};
 		}
+    case ASSIGN_TO_UPDATE_FOUNDATION_PROFILE_PIC: {
+      return {
+        ...state,
+        foundationToAssign: action.payload
+      };
+    }
 		case SAVE_FOUNDATION_PROFILE_PIC: {
 			return {
 				...state,
-				foundation: action.payload,
+        foundation: action.payload,
+				foundationList: state.foundationList.map(
+           (foundation) => foundation._id === action.payload._id ? action.payload : foundation
+        ),
 			};
 		}
 		case UPDATE_FOUNDATION_PROFILE_INFO: {

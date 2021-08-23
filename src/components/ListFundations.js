@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import ManagerInfoFoundations from "./ManagerInfoFundations";
-
-import { getAllFoundation } from "../store/selectFoundationReducer";
+import { getAllFoundation, assignToUpdateFoundationProfilePic } from "../store/selectFoundationReducer";
 
 function ListFoundations() {
+  const [checkedValue, setIsChecked] = useState(null)
 	const [foundation, setFoundation] = useState({
 		name: "",
 		phone: "",
 		address: "",
+    logo: ""
 	});
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(getAllFoundation());
 	}, []);
+
+  const handleSelect = (id) => {
+    setIsChecked(id);
+    dispatch(assignToUpdateFoundationProfilePic(id))
+  }
 
 	const handleAssign = (foundation) => {
 		setFoundation(foundation);
@@ -36,10 +42,25 @@ function ListFoundations() {
 						<th>
 							<input
 								type="radio"
+                id={foundation._id}
+                value={foundation._id}
 								name="foundationToAssign"
-								onChange={() => handleAssign(foundation)}
+								onChange={(e) => {
+                  handleSelect(e.target.value);
+                  handleAssign(foundation);
+                }}
 							/>
 						</th>
+            <td>
+              <div className="port">
+                <img
+                  src={foundation.logo}
+                  alt="logo"
+                  className="improf rounded-circle"
+                  width="100"
+                />
+              </div>
+            </td>
 						<td>{foundation.name}</td>
 						<td>{foundation.email}</td>
 						<td>{foundation.phone}</td>
@@ -56,6 +77,7 @@ function ListFoundations() {
 				<thead>
 					<tr>
 						<th>Seleccione</th>
+            <th>Logo</th>
 						<th>Nombre</th>
 						<th>Correo</th>
 						<th>Telefono</th>

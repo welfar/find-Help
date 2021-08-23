@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { createNewFoundation } from "../store/selectFoundationReducer";
-import FoundationProfilePicUpdate from "./FoundationProfilePicUpdate";
+import { createNewFoundation, getFoundation } from "../store/selectFoundationReducer";
+// import FoundationProfilePicUpdate from "./FoundationProfilePicUpdate";
 
 function RegistrationModal() {
 	const [Name, setName] = useState("");
@@ -11,6 +11,16 @@ function RegistrationModal() {
 	const [Address, setAddress] = useState("");
 	const dispatch = useDispatch();
 	const history = useHistory();
+
+  useEffect(() => {
+    dispatch(getFoundation())
+  }, [])
+
+  const { foundation } = useSelector((state) => {
+    return {
+      foundation: state.selectFoundationReducer.foundation,
+    };
+  });
 
 	const handleRegister = () => {
 		dispatch(createNewFoundation(Name, Email, Phone, Address, history));
@@ -52,13 +62,13 @@ function RegistrationModal() {
 							{/* <div className="imgButt d-flex flex-colmun align-items-center">
 								<div className="portrait">
 									<img
-										src={foundation.profilePicture}
+										src={foundation.logo}
 										alt="fundationPicture"
 										className="imageProfile rounded-circle"
 										width="150"
 									/>
-								</div>
-								<button
+								</div> */}
+								{/* <button
 									type="button"
 									data-bs-toggle="modal"
 									data-bs-target="#FoundationProfilePicUpdate"
@@ -66,8 +76,8 @@ function RegistrationModal() {
 									data-bs-dismiss="modal"
 								>
 									Agregar Logo
-								</button>
-							</div> */}
+								</button> */}
+							{/* </div> */}
 							<div>
 								<label htmlFor="Name">
 									<strong> *Nombre: </strong>
@@ -142,7 +152,7 @@ function RegistrationModal() {
 					</div>
 				</div>
 			</div>
-			<FoundationProfilePicUpdate />
+			{/* <FoundationProfilePicUpdate /> */}
 		</form>
 	);
 }

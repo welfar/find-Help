@@ -19,16 +19,15 @@ export async function foundationRegister(
   });
 }
 
-export async function updateFoundationProfilePic (token, data) {
+export async function updateFoundationProfilePic (data) {
   return await axios({
     method: "PUT",
     baseURL: process.env.REACT_APP_SERVER_URL,
     url: "/Foundations/foundationsProfilePic",
     data,
     headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "multipart/form-data",
-    },
+			"Content-Type": "multipart/form-data",
+		},
   });
 }
 
@@ -69,7 +68,6 @@ export async function getFoundationInfo() {
 }
 
 export async function destroyFoundation(foundationId) {
-  console.log(foundationId, "services")
   return await axios({
     method: "DELETE",
     baseURL: process.env.REACT_APP_SERVER_URL,
